@@ -7,9 +7,10 @@ import "./Palette.css";
 class Palette extends Component {
     constructor(props) {
         super(props);
-        this.state = {level: 500, format: "hex"};
+        this.state = {level: 500, format: "hex", copying: false};
         this.changeLevel = this.changeLevel.bind(this);
         this.changeFormat = this.changeFormat.bind(this);
+        this.setCopying = this.setCopying.bind(this);
     }
 
     changeLevel(level) {
@@ -19,15 +20,19 @@ class Palette extends Component {
     changeFormat(format) {
         this.setState({format});
     }
+
+    setCopying(value) {
+        this.setState({copying: value});
+    }
     
     render() {
         const {colors, paletteName, emoji} = this.props.palette;
-        const {level, format} = this.state;
+        const {level, format, copying} = this.state;
         const colorBoxes = colors[level].map(color => {
-            return <ColorBox key={color.id} background={color[format]} name={color.name} />;
+            return <ColorBox key={color.id} background={color[format]} name={color.name} setCopying={this.setCopying} />;
         });
         return (
-            <div className="Palette">
+            <div className={`Palette ${copying && "copying"}`}>
                 <Navbar level={level} changeLevel={this.changeLevel} handleChange={this.changeFormat} />
                 <div className="Palette-colors">
                     {colorBoxes}
