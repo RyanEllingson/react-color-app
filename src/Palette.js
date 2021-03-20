@@ -19,7 +19,7 @@ class Palette extends Component {
     changeFormat(format) {
         this.setState({format});
     }
-
+    
     render() {
         const {colors} = this.props.palette;
         const {level, format} = this.state;
