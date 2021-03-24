@@ -26,10 +26,10 @@ class Palette extends Component {
     }
     
     render() {
-        const {colors, paletteName, emoji} = this.props.palette;
+        const {colors, paletteName, emoji, id} = this.props.palette;
         const {level, format, copying} = this.state;
         const colorBoxes = colors[level].map(color => {
-            return <ColorBox key={color.id} background={color[format]} name={color.name} setCopying={this.setCopying} />;
+            return <ColorBox key={color.id} id={color.id} paletteId={id} background={color[format]} name={color.name} setCopying={this.setCopying} />;
         });
         return (
             <div className={`Palette ${copying && "copying"}`}>
