@@ -40,7 +40,7 @@ class SingleColorPalette extends Component {
         const {format} = this.state;
         const colorBoxes = this._shades.map(chosenColor => {
             const color = chosenColor[0];
-            return <ColorBox key={color.name} name={color.name} background={color[format]} showLink={false} setCopying={this.setCopying} /> 
+            return <ColorBox key={color.name} name={color.name} background={color[format]} showingFullPalette={false} setCopying={this.setCopying} /> 
         });
 
         return (
@@ -49,6 +49,7 @@ class SingleColorPalette extends Component {
                 <div className="Palette-colors">
                     {colorBoxes}
                     <div className="go-back ColorBox">
+                    {/* <div className="go-back"> */}
                         <Link className="back-button" to={`/palette/${id}`}>Go Back</Link>
                     </div>
                 </div>
