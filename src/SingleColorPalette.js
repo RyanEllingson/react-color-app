@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
 
 const styles = {
-    ColorBox: {
+    goBack: {
         width: "20%",
         height: "50%",
         margin: "0 auto",
@@ -35,6 +35,17 @@ const styles = {
         border: "none",
         cursor: "pointer",
         textDecoration: "none"
+    },
+    Palette: {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column"
+    },
+    colors: {
+        height: "90vh"
+    },
+    copying: {
+        overflow: "hidden"
     }
 }
 
@@ -72,18 +83,18 @@ class SingleColorPalette extends Component {
     render() {
         const {id, paletteName, emoji} = this.props.palette;
         const {classes} = this.props;
-        const {format} = this.state;
+        const {format, copying} = this.state;
         const colorBoxes = this._shades.map(chosenColor => {
             const color = chosenColor[0];
             return <ColorBox key={color.name} name={color.name} background={color[format]} showingFullPalette={false} setCopying={this.setCopying} /> 
         });
 
         return (
-            <div className="SingleColorPalette Palette">
+            <div className={`${classes.Palette} ${copying && classes.copying}`}>
                 <Navbar handleChange={this.changeFormat} showingAllColors={false} />
-                <div className="Palette-colors">
+                <div className={classes.colors}>
                     {colorBoxes}
-                    <div className={classes.ColorBox}>
+                    <div className={classes.goBack}>
                     {/* <div className="go-back"> */}
                         <Link className={classes.backButton} to={`/palette/${id}`}>Go Back</Link>
                     </div>
